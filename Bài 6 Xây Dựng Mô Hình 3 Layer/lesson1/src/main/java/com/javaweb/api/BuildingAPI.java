@@ -15,18 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.javaweb.dto.request.BuildingDTO;
 import com.javaweb.dto.response.BuildingResponseDTO;
 import com.javaweb.myexception.ValidateDataBuildingException;
+import com.javaweb.service.BuildingService;
 import com.javaweb.service.impl.BuildingServiceImpl;
 
 @RestController
 @RequestMapping("/api/buildings")
 public class BuildingAPI {
 	@Autowired
-	private BuildingServiceImpl buildingServiceImpl;
+	private BuildingService buildingService;
 
 	@GetMapping
 	public Object getBuilding(@RequestParam(name = "name", required = false) String nameBuilding,
 			@RequestParam(name = "numberOfBasement", required = false) Long numberOfBasement) {
-		List<BuildingResponseDTO> results = buildingServiceImpl.findAll(nameBuilding, numberOfBasement);
+		List<BuildingResponseDTO> results = buildingService.findAll(nameBuilding, numberOfBasement);
 		return results;
 	}
 
